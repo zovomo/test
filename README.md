@@ -104,3 +104,28 @@ function convertBase64UrlToBlob(urlData, type) {
   return new Blob([ab], { type: "image/" + type });
 }
 
+
+var offCanvas = document.createElement("canvas"),
+        offContext = offCanvas.getContext("2d"),
+        w = _self.cutRect.width,
+        h = _self.cutRect.height;
+      offCanvas.width = w;
+      offCanvas.height = h;
+      offContext.drawImage(_self.canvas, _self.cutRect.x, _self.cutRect.y, w, h, 0, 0, w, h);
+      // _self.ret64 = offCanvas.toDataURL("image/jpeg", _self.quality);
+      // _self.ret64 = offCanvas.toBlob("image/jpeg", _self.quality);
+      offCanvas.toBlob(function (blob) {
+        var newImg = document.createElement("img"),
+          url = URL.createObjectURL(blob);
+
+        newImg.onload = function () {
+          // no longer need to read the blob so it's revoked
+          URL.revokeObjectURL(url);
+        };
+
+        console.log(blob, 666);
+
+
+        newImg.src = url;
+        document.body.appendChild(newImg);
+      });
