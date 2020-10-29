@@ -1,5 +1,9 @@
 # test
 https://www.cnblogs.com/xxcanghai/articles/5099187.html
+#
+https://blog.csdn.net/qiphon3650/article/details/80087987
+
+##
 canvas转换为dataURL (从canvas获取dataURL)
 var dataurl = canvas.toDataURL('image/png');
 var dataurl2 = canvas.toDataURL('image/jpeg', 0.8);
