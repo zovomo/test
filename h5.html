@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="renderer" content="webkit" />
+  <meta http-equiv="Cache-Control" content="no-cache" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="format-detection" content="telephone=no" />
+  <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
+  <meta name="screen-orientation" content="portrait" />
+  <meta name="x5-orientation" content="portrait" />
+  <title></title>
+</head>
+<script>
+  (function () {
+    var ua = window.navigator.userAgent;
+    var browserCls = [];
+    if (/android/i.test(ua)) {
+      browserCls.push("android");
+    }
+    if (/os x/i.test(ua)) {
+      browserCls.push("ios");
+    }
+    if (/micromessenger/i.test(ua)) {
+      browserCls.push("wechat");
+    }
+    if (window.isMobile) {
+      browserCls.push("mobile");
+    } else {
+      browserCls.push("desktop");
+    }
+    document.documentElement.className += " " + browserCls.join(" ");
+  })();
+
+  function getMapInfoCallback(data) {
+    var setItemEvent = new Event("setItemEvent");
+    setItemEvent.mapData = data;
+    window.dispatchEvent(setItemEvent);
+  }
+
+  function searchCallback(data) {
+    var searchCallback = new Event("searchCallback");
+    searchCallback.searchData = data;
+    window.dispatchEvent(searchCallback);
+  }
+
+  function mapSubmit(data) {
+    var mapSubmit = new Event("mapSubmit");
+    mapSubmit.submitData = data;
+    window.dispatchEvent(mapSubmit);
+  }
+
+</script>
+
+<body>
+  <div id="app">
+    <router-view></router-view>
+  </div>
+  <!-- built files will be auto injected -->
+  <!--<script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script>-->
+</body>
+
+</html>
